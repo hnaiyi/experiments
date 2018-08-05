@@ -4,3 +4,57 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+  ext {
+    protobufPluginVersion = '0.8.6'
+    protobufJavaVersion = '3.6.1'
+    protocVersion = '3.6.1'
+  }
+
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin'
+  }
+  dependencies {
+    constraints {
+      classpath "com.google.protobuf:protobuf-gradle-plugin:$protobufPluginVersion"
+    }
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "com.google.protobuf:protobuf-java:$protobufJavaVersion"
+}
+
+sourceSets {
+  main {
+    proto {
+      srcDirs = ['src/proto']
+    }
+    java {
+      srcDirs = ['src/java']
+    }
+  }
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:$protocVersion"
+  }
+
+  generateProtoTasks.generatedFilesBaseDir = 'build/generated-proto-class'
+}
+
+mainClassName = 'protocolbuffer.ProtoDemo'
+

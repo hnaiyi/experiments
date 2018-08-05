@@ -1,12 +1,15 @@
 package protocolbuffer;
 
-public static void main(String[] args) throws Exception {
-  
-  User.Profile profile =
-      User.Profile.newBuilder()
-          .setName("Jack")
-          .setAge(15)
-          .build();
+public class ProtoDemo {
 
-  System.out.println(profile.toString());
+  public static void main(String[] args) {
+    
+    User.Profile profile =
+        User.Profile.newBuilder()
+            .setName("Jack")
+            .setAge(15)
+            .build();
+  
+    System.out.println(profile.toString());
+  }
 }
